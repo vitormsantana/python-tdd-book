@@ -1,12 +1,23 @@
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
+import unittest 
 
 options = Options()
 options.binary_location = "C:\\Program Files\\Mozilla Firefox\\firefox.exe"  
 
-browser = webdriver.Firefox(options=options)
-browser.get("http://localhost:8000")
+class NewVisitorTest(unittest.TestCase):
+    def setUp(self):
+        self.browser = webdriver.Firefox(options=options)
 
-assert "Django" in browser.title
+    def tearDown(self):
+        self.browser.quit()
 
-browser.quit()
+    def test_can_start_a_list_and_retrieve_it_later(self):
+        self.browser.get("http://localhost:8000")
+
+        self.assertIn("To-Do", self.browser.title)
+        self.fail('Finish the test!')
+
+if __name__ == '__main__':
+    unittest.main(warnings='ignore')
+    
