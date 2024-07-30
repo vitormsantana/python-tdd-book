@@ -54,5 +54,5 @@ class ItemModelTest(TestCase):
 
 
 
-#TODO Display multiple items in the table
-#TODO: Support more than one list
+#TODO Clean up after FT runs
+#TODO Remove time.sleeps
