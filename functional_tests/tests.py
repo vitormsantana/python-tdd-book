@@ -11,7 +11,7 @@ import os
 MAX_WAIT = 10
 
 options = Options()
-options.binary_location = "C:\\Program Files\\Mozilla Firefox\\firefox.exe"  
+options.binary_location = "/usr/bin/firefox"  
 
 class NewVisitorTest(StaticLiveServerTestCase):
     def setUp(self):
