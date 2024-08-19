@@ -6,7 +6,7 @@ from selenium.webdriver.common.keys import Keys
 import time
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import WebDriverException
-
+import os
 
 MAX_WAIT = 10
 
@@ -16,6 +16,9 @@ options.binary_location = "C:\\Program Files\\Mozilla Firefox\\firefox.exe"
 class NewVisitorTest(StaticLiveServerTestCase):
     def setUp(self):
         self.browser = webdriver.Firefox(options=options)
+        staging_server = os.environ.get('STAGING_SERVER')
+        if staging_server:
+            self.live_server_url = 'http://' + staging_server
 
     def tearDown(self):
         self.browser.quit()
@@ -95,8 +98,9 @@ class NewVisitorTest(StaticLiveServerTestCase):
         self.browser.set_window_size(1024, 768)
 
         inputbox = self.browser.find_element_by_id('id_new_item')
+        self.assertAlmostEqual(inputbox.location['x'] + inputbox.size['width'] / 2, 512, delta=10)
         inputbox.send_keys('testing')
         inputbox.send_keys(Keys.ENTER)
         self.wait_for_row_in_list_table('1: testing')
-        time.sleep(2.5)
+        inputbox = self.browser.find_element_by_id('id_new_item')
         self.assertAlmostEqual(inputbox.location['x'] + inputbox.size['width'] / 2, 512, delta=10)

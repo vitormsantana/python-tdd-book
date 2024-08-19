@@ -1,5 +1,8 @@
 db.sqlite3
 geckodriver.log
 virtualenv
+.venv
 *.pyc
 __pycache__
+/static/*
+.gitignore
