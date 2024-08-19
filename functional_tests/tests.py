@@ -1,5 +1,6 @@
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium import webdriver
+from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.firefox.options import Options
 import unittest 
 from selenium.webdriver.common.keys import Keys
@@ -11,7 +12,10 @@ import os
 MAX_WAIT = 10
 
 options = Options()
+options.headless = True
+service = Service('/usr/local/bin/geckodriver')
 options.binary_location = "/usr/bin/firefox"  
+browser = webdriver.Firefox(service=service, options=options)
 
 class NewVisitorTest(StaticLiveServerTestCase):
     def setUp(self):
