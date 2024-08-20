@@ -4,9 +4,12 @@ from selenium.common.exceptions import WebDriverException
 from selenium.webdriver.common.keys import Keys
 import sys
 import time
+from selenium.webdriver import FirefoxOptions
 
 MAX_WAIT = 10
 
+opts = FirefoxOptions()
+opts.add_argument("--headless")
 
 class NewVisitorTest(StaticLiveServerTestCase):
 
@@ -20,7 +23,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
         cls.server_url = cls.live_server_url
 
     def setUp(self):
-        self.browser = webdriver.Firefox()
+        self.browser = webdriver.Firefox(options=opts)
 
     def tearDown(self):
         self.browser.quit()
@@ -97,7 +100,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
         ## We use a new browser session to make sure that no information
         ## of Edith's is coming through from cookies etc
         self.browser.quit()
-        self.browser = webdriver.Firefox()
+        self.browser = webdriver.Firefox(options=opts)
 
         # Francis visits the home page.  There is no sign of Edith's
         # list
