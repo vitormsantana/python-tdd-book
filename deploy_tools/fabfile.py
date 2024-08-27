@@ -7,14 +7,20 @@ env.key_filename = 'C:/Users/vitor/OneDrive/Documentos/python/oreilly/tdd-key.pe
 
 def deploy():
     #site_folder = f'/home/{env.user}/sites/{env.host}'
-    site_folder = f'/home/sites/{env.host}'
+    #site_folder = f'/home/sites/{env.host}'
+    site_folder = f'/home/sites/python-tdd-book'
     if not exists(site_folder):
         run(f'mkdir -p {site_folder}')
     with cd(site_folder):
+        print(f'now, run {_get_latest_source} \n----------\n')
         _get_latest_source()
+        print(f'now, run {_update_virtualenv} \n----------\n')
         _update_virtualenv()
+        print(f'now, run {_create_or_update_dotenv} \n----------\n')
         _create_or_update_dotenv()
+        print(f'now, run {_update_static_files} \n----------\n')
         _update_static_files()
+        print(f'now, run {_update_database} \n----------\n')
         _update_database()
 
 def _get_latest_source():
