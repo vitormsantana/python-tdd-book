@@ -8,7 +8,8 @@ env.key_filename = 'C:/Users/vitor/OneDrive/Documentos/python/oreilly/tdd-key.pe
 def deploy():
     #site_folder = f'/home/{env.user}/sites/{env.host}'
     #site_folder = f'/home/sites/{env.host}'
-    site_folder = f'/home/sites/python-tdd-book'
+    #site_folder = f'/home/sites/python-tdd-book'
+    site_folder = f'/home/sites/vifevi-tdd.online'
     if not exists(site_folder):
         run(f'mkdir -p {site_folder}')
     with cd(site_folder):
