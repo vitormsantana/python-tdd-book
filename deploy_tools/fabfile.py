@@ -3,10 +3,12 @@ from fabric.contrib.files import append, exists
 from fabric.api import cd, env, local, run
 
 REPO_URL = 'https://github.com/vitormsantana/python-tdd-book.git'
+env.key_filename = 'C:/Users/vitor/OneDrive/Documentos/python/oreilly/tdd-key.pem'
 
 def deploy():
     #site_folder = f'/home/{env.user}/sites/{env.host}'
-    site_folder = f'/home/sites/{env.host}'
+    if not exists(site_folder):
+        site_folder = f'/home/sites/{env.host}'
     run(f'mkdir -p {site_folder}')
     with cd(site_folder):
         _get_latest_source()
